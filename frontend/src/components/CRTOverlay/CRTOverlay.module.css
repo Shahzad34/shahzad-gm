@@ -1,0 +1,41 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  pointer-events: none;
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  opacity: 0.13;
+  mix-blend-mode: overlay;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 243, 255, 0.05),
+    rgba(0, 243, 255, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 62%, rgba(8, 8, 12, 0.42) 100%);
+}
+
+/* Barely-there ambient flicker — enough to keep the screen feeling
+   "powered", nowhere near a strobe. */
+.flicker {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 243, 255, 0.014);
+  animation: crtFlicker 11s infinite steps(1);
+}
+
+@keyframes crtFlicker {
+  0%, 97%, 100% { opacity: 0; }
+  98% { opacity: 1; }
+  99% { opacity: 0.5; }
+}

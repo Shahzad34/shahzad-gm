@@ -1,0 +1,210 @@
+/* Centered, single-column invitation: headline, primary CTA and the
+   secondary contact channels, then the form itself. Capped and centred so
+   the section reads as an invitation instead of a dashboard. */
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.intro {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.wrap.visible .intro {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lede {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* CTA row: the primary "Start a Project" button beside the smaller
+   "Download My CV" link — wraps to stacked rows on narrow screens. */
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.ctaBtn {
+  margin-top: 0;
+}
+
+.downloadCv {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 13.5px;
+  color: var(--text-muted);
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.downloadCv:hover {
+  color: var(--text-primary);
+  border-color: rgba(0, 240, 255, 0.42);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px -16px rgba(0, 240, 255, 0.55);
+}
+
+.downloadCv svg {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.downloadCv:hover svg {
+  transform: translateY(2px);
+}
+
+.channels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.channel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 13.5px;
+  color: var(--text-muted);
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out);
+}
+
+.channel:hover {
+  color: var(--text-primary);
+  border-color: rgba(0, 240, 255, 0.28);
+  background: rgba(0, 240, 255, 0.04);
+}
+
+.form {
+  margin-top: 56px;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out) 0.1s, transform 0.6s var(--ease-out) 0.1s;
+  border-radius: var(--radius-lg);
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  scroll-margin-top: 96px;
+}
+
+@media (min-width: 640px) {
+  .form {
+    padding: 40px;
+  }
+}
+
+.wrap.visible .form {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 520px) {
+  .row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.field input,
+.field textarea {
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255,255,255,0.02);
+  font-size: 14.5px;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+  resize: vertical;
+  min-height: 50px;
+}
+
+.field textarea {
+  min-height: 132px;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--text-faint);
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: rgba(0, 240, 255, 0.42);
+  background: rgba(0, 240, 255, 0.03);
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.09);
+  outline: none;
+}
+
+.submit {
+  margin-top: 4px;
+  width: 100%;
+}
+
+.submit:disabled {
+  opacity: 0.7;
+  cursor: default;
+  transform: none;
+}
+
+.success, .error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+}
+
+.success {
+  color: var(--cyan);
+  background: var(--cyan-soft);
+  border: 1px solid rgba(0, 240, 255, 0.18);
+}
+
+.error {
+  color: #FF8A8A;
+  background: rgba(255, 90, 90, 0.07);
+  border: 1px solid rgba(255, 90, 90, 0.22);
+}

@@ -1,0 +1,238 @@
+.hud {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  color: #eafff2;
+}
+
+@media (min-width: 768px) {
+  .hud {
+    padding: 36px 48px;
+  }
+}
+
+/* Corner HUD brackets */
+.corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2px solid rgba(0, 255, 102, 0.65);
+}
+
+.cornerTL { top: 14px; left: 14px; border-right: none; border-bottom: none; }
+.cornerTR { top: 14px; right: 14px; border-left: none; border-bottom: none; }
+.cornerBL { bottom: 14px; left: 14px; border-right: none; border-top: none; }
+.cornerBR { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+
+@media (min-width: 768px) {
+  .cornerTL, .cornerTR, .cornerBL, .cornerBR { width: 34px; height: 34px; }
+  .cornerTL, .cornerTR { top: 28px; }
+  .cornerBL, .cornerBR { bottom: 28px; }
+  .cornerTL, .cornerBL { left: 28px; }
+  .cornerTR, .cornerBR { right: 28px; }
+}
+
+.panel {
+  background: linear-gradient(180deg, rgba(9, 14, 12, 0.55), rgba(5, 10, 9, 0.35));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 255, 102, 0.28);
+  box-shadow: 0 0 0 1px rgba(34, 224, 255, 0.06) inset, 0 20px 50px -20px rgba(0, 0, 0, 0.7);
+}
+
+.topBar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.levelBadge {
+  padding: 8px 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.levelCode {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: #00ff66;
+  text-shadow: 0 0 12px rgba(0, 255, 102, 0.6);
+}
+
+.mainPanelWrap {
+  display: flex;
+  justify-content: flex-start;
+  margin: auto 0 0;
+}
+
+.mainPanel {
+  pointer-events: auto;
+  max-width: 480px;
+  width: 100%;
+  padding: 22px 22px 26px;
+  border-radius: 10px;
+  animation: panelIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 768px) {
+  .mainPanel {
+    padding: 30px 32px 34px;
+  }
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 4.6vw, 30px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  font-size: 12.5px;
+  color: #00f3ff;
+  letter-spacing: 0.03em;
+  margin-bottom: 14px;
+}
+
+.description {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: rgba(234, 255, 242, 0.72);
+  margin-bottom: 20px;
+}
+
+.levelDots {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .levelDots {
+    display: flex;
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 255, 102, 0.5);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dotActive {
+  background: #00ff66;
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.8);
+}
+
+.scrollCue {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(234, 255, 242, 0.5);
+}
+
+@media (min-width: 640px) {
+  .scrollCue {
+    display: flex;
+  }
+}
+
+.scrollCueLine {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(180deg, #00ff66, transparent);
+  animation: scrollCueMove 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollCueMove {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.3; }
+}
+
+/* --- Scroll / health bar --- */
+
+.healthBarWrap {
+  flex: 1;
+  max-width: 280px;
+  min-width: 160px;
+}
+
+.healthBarLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(234, 255, 242, 0.6);
+  margin-bottom: 6px;
+}
+
+.healthBarTrack {
+  position: relative;
+  height: 10px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 255, 102, 0.25);
+  overflow: hidden;
+}
+
+.healthBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff66, #00f3ff);
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.7);
+  transition: width 0.05s linear;
+}
+
+.healthBarTicks {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 9%,
+    rgba(10, 10, 12, 0.6) 9%,
+    rgba(10, 10, 12, 0.6) 10%
+  );
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mainPanel { animation: none; }
+  .scrollCueLine { animation: none; }
+}

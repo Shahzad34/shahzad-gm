@@ -1,0 +1,150 @@
+.grid {
+  display: grid;
+  gap: 56px;
+  align-items: start;
+}
+
+@media (min-width: 980px) {
+  .grid {
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 80px;
+  }
+}
+
+.copy {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.grid.visible .copy {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Lead paragraph — the one piece of body copy that carries the section,
+   so it sits brighter and larger than the supporting line below it. */
+.lead {
+  color: #AEB9CA;
+  font-size: 17.5px;
+  line-height: 1.85;
+  max-width: 62ch;
+  margin-bottom: 18px;
+}
+
+.paragraph {
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 40px;
+  font-size: 15.5px;
+  max-width: 62ch;
+}
+
+.profileCard {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease-out) 0.15s, transform 0.7s var(--ease-out) 0.15s;
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  overflow: hidden;
+  text-align: center;
+  align-self: start;
+}
+
+.grid.visible .profileCard {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.profileGlow {
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.10), transparent 70%);
+  pointer-events: none;
+}
+
+.status {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--cyan);
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  background: rgba(0, 240, 255, 0.05);
+  padding: 7px 15px;
+  border-radius: 999px;
+  margin-bottom: 26px;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 6px rgba(0, 240, 255, 0.7);
+}
+
+.avatar {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(140deg, rgba(0, 240, 255, 0.14), rgba(176, 38, 255, 0.14) 75%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--text-primary);
+}
+
+.name {
+  position: relative;
+  font-size: 19px;
+  margin-bottom: 6px;
+}
+
+.role {
+  position: relative;
+  color: var(--text-muted);
+  font-size: 12.5px;
+  margin-bottom: 26px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+.metaList {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding-top: 22px;
+}
+
+.metaList li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.metaIcon {
+  color: var(--neon-cyan);
+  opacity: 0.85;
+  flex-shrink: 0;
+}

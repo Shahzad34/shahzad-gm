@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0c" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- ---- Identity ---- -->
+    <title>Shahzad GM — Full Stack Developer</title>
+    <meta
+      name="description"
+      content="Shahzad GM — Full Stack Developer specializing in the MERN stack."
+    />
+    <meta name="author" content="Shahzad GM" />
+    <meta
+      name="keywords"
+      content="Shahzad GM, full stack developer, MERN stack developer, React developer, Node.js, Express, MongoDB, portfolio"
+    />
+
+    <!-- ---- Open Graph ---- -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Shahzad GM — Developer Portfolio" />
+    <meta property="og:title" content="Shahzad GM — Full Stack Developer" />
+    <meta
+      property="og:description"
+      content="Shahzad GM — Full Stack Developer specializing in the MERN stack."
+    />
+    <meta property="og:image" content="/assets/hero-character.png" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ---- Twitter / X card ---- -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Shahzad GM — Full Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="Shahzad GM — Full Stack Developer specializing in the MERN stack."
+    />
+    <meta name="twitter:image" content="/assets/hero-character.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--
+      ============================================================
+      CRITICAL INLINE BOOT SPLASH
+      ============================================================
+      Inlined and dependency-free so the very first painted frame is
+      already the themed dark neon loading screen — no white flash
+      between the HTML parse and React mounting. This is the site's ONLY
+      loading screen; it lives here precisely because it must paint before
+      React mounts. main.jsx closes it once React has painted, and it
+      broadcasts boot:reveal / boot:done so the Hero can time its
+      entrance to the wipe.
+      No image/font/icon requests; transform + opacity only.
+    -->
+    <style>
+      /* Kill the white flash: dark before any stylesheet resolves. */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0a0a0c;
+      }
+
+      #boot-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 2147483000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #0a0a0c;
+        color: #eaf6ff;
+        font-family: 'Orbitron', 'Rajdhani', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #boot-loader.is-done {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      /* ---- ambient background: grid + two drifting neon orbs ---- */
+      .boot-bg {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .boot-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(0, 240, 255, 0.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 240, 255, 0.055) 1px, transparent 1px);
+        background-size: 40px 40px;
+        -webkit-mask-image: radial-gradient(ellipse 78% 68% at 50% 50%, #000 12%, transparent 100%);
+        mask-image: radial-gradient(ellipse 78% 68% at 50% 50%, #000 12%, transparent 100%);
+      }
+
+      .boot-orb {
+        position: absolute;
+        width: min(62vw, 540px);
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        filter: blur(90px);
+      }
+
+      .boot-orb--a {
+        top: -16%;
+        left: -14%;
+        background: rgba(176, 38, 255, 0.3);
+        animation: boot-drift 9s ease-in-out infinite;
+      }
+
+      .boot-orb--b {
+        right: -14%;
+        bottom: -18%;
+        background: rgba(0, 240, 255, 0.24);
+        animation: boot-drift 11s ease-in-out infinite reverse;
+      }
+
+      @keyframes boot-drift {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0);
+        }
+        50% {
+          transform: translate3d(0, -20px, 0);
+        }
+      }
+
+      /* ---- centre stage ---- */
+      .boot-stage {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 22px;
+        width: min(88vw, 400px);
+      }
+
+      /* ---- glowing SG monogram ---- */
+      .boot-mark {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 92px;
+        height: 92px;
+        border-radius: 26px;
+        background: linear-gradient(140deg, rgba(0, 240, 255, 0.14), rgba(176, 38, 255, 0.18));
+        box-shadow:
+          0 0 44px -12px rgba(0, 240, 255, 0.7),
+          inset 0 0 32px -14px rgba(176, 38, 255, 0.9);
+        animation: boot-pulse 2.6s ease-in-out infinite;
+      }
+
+      /* gradient hairline border (padding + mask-composite trick) */
+      .boot-mark::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1.5px;
+        background: linear-gradient(140deg, #00f0ff, #b026ff);
+        -webkit-mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        mask-composite: exclude;
+      }
+
+      @keyframes boot-pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.045);
+        }
+      }
+
+      .boot-mark__text {
+        font-weight: 900;
+        font-size: 29px;
+        letter-spacing: 0.04em;
+        background: linear-gradient(120deg, #00f0ff, #b026ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.5));
+      }
+
+      /* ---- name ---- */
+      .boot-name {
+        font-size: clamp(19px, 5.6vw, 28px);
+        font-weight: 800;
+        letter-spacing: 0.3em;
+        /* cancels the trailing letter-space so the name stays optically centred */
+        text-indent: 0.3em;
+        color: #eaf6ff;
+        text-shadow: 0 0 24px rgba(0, 240, 255, 0.35);
+        white-space: nowrap;
+      }
+
+      /* ---- progress bar ---- */
+      .boot-bar {
+        position: relative;
+        width: 100%;
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.07);
+        overflow: hidden;
+      }
+
+      .boot-bar__fill {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #00f0ff, #b026ff);
+        box-shadow: 0 0 14px rgba(0, 240, 255, 0.65);
+      }
+
+      /* travelling shine so the bar reads as "alive" between updates */
+      .boot-bar__fill::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+        animation: boot-sweep 1.6s linear infinite;
+      }
+
+      @keyframes boot-sweep {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      /* ---- status row ---- */
+      .boot-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(139, 149, 167, 0.9);
+      }
+
+      .boot-pct {
+        color: #00f0ff;
+        font-variant-numeric: tabular-nums;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        /* Users who ask for reduced motion get the site directly, so the
+           splash is never shown at all. */
+        #boot-loader {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Pre-React boot splash. Removed once React takes over. -->
+    <div id="boot-loader" role="status" aria-live="polite" aria-label="Loading portfolio">
+      <div class="boot-bg" aria-hidden="true">
+        <div class="boot-grid"></div>
+        <div class="boot-orb boot-orb--a"></div>
+        <div class="boot-orb boot-orb--b"></div>
+      </div>
+
+      <div class="boot-stage">
+        <div class="boot-mark"><span class="boot-mark__text">SG</span></div>
+        <div class="boot-name">Shahzad GM</div>
+        <div class="boot-bar"><div class="boot-bar__fill" id="boot-bar"></div></div>
+        <div class="boot-meta">
+          <span id="boot-status">Booting system</span>
+          <span class="boot-pct" id="boot-pct">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="root"></div>
+
+    <!--
+      Boot splash controller: drives the progress bar, exposes
+      window.__BOOT__.dismiss() for main.jsx, broadcasts boot:reveal /
+      boot:done to React, and keeps an 8s failsafe so the splash can
+      never trap the user if the bundle fails.
+    -->
+    <script>
+      (function () {
+        var root = document.getElementById('boot-loader');
+        if (!root) return;
+
+        // The admin panel is a plain dashboard with none of the public site's
+        // decorative chrome, so it skips the splash entirely. Defining
+        // __BOOT__ here (rather than bailing out) keeps main.jsx's
+        // window.__BOOT__?.dismiss() call safe, and it still paints the dark
+        // background underneath so there is no white flash.
+        if (window.location.pathname.indexOf('/admin') === 0) {
+          root.parentNode.removeChild(root);
+          window.__BOOT__ = {
+            dismiss: function () {},
+            revealed: true,
+            done: true,
+          };
+          return;
+        }
+
+        var bar = document.getElementById('boot-bar');
+        var pct = document.getElementById('boot-pct');
+        var status = document.getElementById('boot-status');
+
+        var PHASES = ['Booting system', 'Loading assets', 'Linking modules'];
+        var MIN_MS = 650; // never flash past — the splash should read as deliberate
+        var startedAt = Date.now();
+        var shown = 0;
+        var target = 0;
+        var raf = null;
+        var dying = false;
+
+        function paint() {
+          bar.style.width = shown.toFixed(1) + '%';
+          pct.textContent = Math.round(shown) + '%';
+        }
+
+        function loop() {
+          if (shown < target) shown += (target - shown) * 0.12;
+          if (target - shown < 0.1) shown = target;
+          paint();
+          // Keep ticking while phases ramp, and while the final 100%
+          // push settles after dismiss().
+          if (shown < target || !dying) raf = requestAnimationFrame(loop);
+          else raf = null;
+        }
+
+        function run() {
+          if (raf === null) raf = requestAnimationFrame(loop);
+        }
+
+        function ramp(to, phase) {
+          target = to;
+          if (typeof phase === 'number' && status) status.textContent = PHASES[phase];
+          run();
+        }
+
+        function dismiss() {
+          if (dying) return;
+
+          // Respect the minimum on-screen time, then re-enter to actually close.
+          var wait = MIN_MS - (Date.now() - startedAt);
+          if (wait > 0) {
+            setTimeout(dismiss, wait);
+            return;
+          }
+
+          dying = true;
+          if (status) status.textContent = 'Ready';
+
+          // Tell React the wipe is beginning so the Hero can time its own
+          // entrance to land exactly as the splash opens. The sticky flags
+          // cover the case where React attaches its listener after this.
+          window.__BOOT__.revealed = true;
+          window.dispatchEvent(new CustomEvent('boot:reveal'));
+
+          shown = Math.max(shown, 96);
+          target = 100;
+          run();
+          setTimeout(function () {
+            shown = 100;
+            paint();
+            root.classList.add('is-done');
+            setTimeout(function () {
+              if (root.parentNode) root.parentNode.removeChild(root);
+              window.__BOOT__.done = true;
+              window.dispatchEvent(new CustomEvent('boot:done'));
+            }, 600);
+          }, 240);
+        }
+
+        window.__BOOT__ = { dismiss: dismiss, revealed: false, done: false };
+
+        // Drift toward 92% while the bundle streams in, so the bar never
+        // claims to be finished before it actually is.
+        ramp(26, 0);
+        setTimeout(function () {
+          ramp(58, 1);
+        }, 420);
+        setTimeout(function () {
+          ramp(88, 2);
+        }, 1000);
+
+        // Failsafe: never leave the user staring at the splash.
+        setTimeout(dismiss, 8000);
+      })();
+    </script>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

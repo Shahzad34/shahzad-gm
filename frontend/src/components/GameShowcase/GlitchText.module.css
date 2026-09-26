@@ -1,0 +1,81 @@
+.glitch {
+  position: relative;
+  display: inline-block;
+  color: #eafff2;
+  letter-spacing: 0.02em;
+}
+
+.layerGreen,
+.layerCyan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+}
+
+.layerGreen {
+  color: #00ff66;
+  animation: glitchShiftA 3.4s infinite linear;
+  mix-blend-mode: screen;
+}
+
+.layerCyan {
+  color: #00f3ff;
+  animation: glitchShiftB 2.6s infinite linear;
+  mix-blend-mode: screen;
+}
+
+@keyframes glitchShiftA {
+  0%, 92%, 100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  93% {
+    clip-path: inset(10% 0 60% 0);
+    transform: translate(-2px, 0);
+    opacity: 0.85;
+  }
+  95% {
+    clip-path: inset(60% 0 5% 0);
+    transform: translate(2px, 0);
+    opacity: 0.85;
+  }
+  97% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translate(-1px, 0);
+    opacity: 0.7;
+  }
+}
+
+@keyframes glitchShiftB {
+  0%, 90%, 100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  91% {
+    clip-path: inset(70% 0 5% 0);
+    transform: translate(2px, 0);
+    opacity: 0.85;
+  }
+  94% {
+    clip-path: inset(5% 0 70% 0);
+    transform: translate(-2px, 0);
+    opacity: 0.85;
+  }
+  96% {
+    clip-path: inset(45% 0 20% 0);
+    transform: translate(1px, 0);
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layerGreen, .layerCyan {
+    animation: none;
+    opacity: 0;
+  }
+}
