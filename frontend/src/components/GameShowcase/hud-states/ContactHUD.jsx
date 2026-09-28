@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Github, Linkedin, Mail, MessageCircle, Briefcase } from "lucide-react";
-import { sendContactMessage } from "../../../lib/api.js";
+import { sendContactMessage } from "../../../lib/contact.js";
 import GlitchText from "../GlitchText.jsx";
 import shared from "../HUD.module.css";
 import styles from "./ContactHUD.module.css";
@@ -31,8 +31,7 @@ export default function ContactHUD() {
       setStatus({ state: "success", message: res.message || "Transmission received." });
       setForm(initialForm);
     } catch (err) {
-      const message =
-        err?.response?.data?.message || "Connection failed — is the backend server running?";
+      const message = err?.message || "Transmission failed — try emailing directly.";
       setStatus({ state: "error", message });
     }
   }

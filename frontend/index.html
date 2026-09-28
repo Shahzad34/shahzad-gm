@@ -313,21 +313,6 @@
         var root = document.getElementById('boot-loader');
         if (!root) return;
 
-        // The admin panel is a plain dashboard with none of the public site's
-        // decorative chrome, so it skips the splash entirely. Defining
-        // __BOOT__ here (rather than bailing out) keeps main.jsx's
-        // window.__BOOT__?.dismiss() call safe, and it still paints the dark
-        // background underneath so there is no white flash.
-        if (window.location.pathname.indexOf('/admin') === 0) {
-          root.parentNode.removeChild(root);
-          window.__BOOT__ = {
-            dismiss: function () {},
-            revealed: true,
-            done: true,
-          };
-          return;
-        }
-
         var bar = document.getElementById('boot-bar');
         var pct = document.getElementById('boot-pct');
         var status = document.getElementById('boot-status');

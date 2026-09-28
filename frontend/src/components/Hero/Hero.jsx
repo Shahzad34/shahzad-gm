@@ -22,7 +22,7 @@ import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion.js"
  * progress bars under it. Nothing about it blocks scrolling.
  */
 
-const CHARACTER_IMAGE = "/assets/hero-character.png";
+const CHARACTER_IMAGE = `${import.meta.env.BASE_URL}assets/hero-character.png`;
 
 // The four roles this portfolio actually represents.
 const ROLES = [
@@ -207,7 +207,7 @@ export default function Hero({ reveal }) {
               />
             </Link>
             <a
-              href="/cv/Shahzad-CV.pdf"
+              href={`${import.meta.env.BASE_URL}cv/Shahzad-CV.pdf`}
               download="Shahzad-CV.pdf"
               aria-label="Download Shahzad CV"
               data-hero="cta"

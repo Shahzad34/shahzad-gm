@@ -11,13 +11,10 @@ import AboutPage from "./pages/About.jsx";
 import SkillsPage from "./pages/Skills.jsx";
 import ProjectsPage from "./pages/Projects.jsx";
 import ContactPage from "./pages/Contact.jsx";
-import AdminPage from "./pages/Admin.jsx";
 
 /**
  * The public site: ambient background, custom cursor, CRT overlay, navbar and
- * footer, plus the five public routes. Extracted from App so the admin panel
- * can render as a plain dashboard with none of that decorative chrome —
- * while still sharing the tokens, fonts and utility classes from index.css.
+ * footer, plus the five public routes.
  */
 function PublicSite({ heroReveal }) {
   return (
@@ -72,9 +69,6 @@ export default function App() {
     <>
       <ScrollToTop />
       <Routes>
-        {/* Admin panel — no loader chrome, no cursor/CRT effects, no nav/footer. */}
-        <Route path="/admin/*" element={<AdminPage />} />
-        {/* Everything else is the public site. */}
         <Route path="*" element={<PublicSite heroReveal={heroReveal} />} />
       </Routes>
     </>

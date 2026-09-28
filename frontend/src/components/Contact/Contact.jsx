@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   Mail, Github, Linkedin, MessageCircle, Briefcase, Send, CheckCircle2, AlertCircle, ArrowRight, Download,
 } from "lucide-react";
-import { sendContactMessage } from "../../lib/api.js";
+import { sendContactMessage } from "../../lib/contact.js";
 import { useReveal } from "../../hooks/useReveal.js";
 import styles from "./Contact.module.css";
 
@@ -34,8 +34,7 @@ export default function Contact() {
       setForm(initialForm);
     } catch (err) {
       const message =
-        err?.response?.data?.message ||
-        "Couldn't reach the server. Make sure the backend is running and try again.";
+        err?.message || "Couldn't send the message. Please email me directly instead.";
       setStatus({ state: "error", message });
     }
   }
@@ -59,7 +58,7 @@ export default function Contact() {
                 Start a Project <ArrowRight size={16} />
               </a>
               <a
-                href="/cv/Shahzad-CV.pdf"
+                href={`${import.meta.env.BASE_URL}cv/Shahzad-CV.pdf`}
                 download="Shahzad-CV.pdf"
                 aria-label="Download Shahzad CV"
                 className={styles.downloadCv}

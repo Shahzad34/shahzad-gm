@@ -1,40 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { skillCategories } from "../../data/skills.js";
-import { fetchSkills } from "../../lib/api.js";
-import { groupSkillsByCategory } from "../../lib/skills.js";
 import { useReveal } from "../../hooks/useReveal.js";
 import SkillCard from "./SkillCard.jsx";
 import styles from "./Skills.module.css";
 
-/**
- * Renders the skill set from the database (GET /api/skills) so the admin
- * panel is the source of truth, falling back to the curated static list in
- * data/skills.js when the API isn't reachable — the same pattern the Projects
- * section already uses.
- */
+/** Renders the skill set straight from the static list in data/skills.js. */
 export default function Skills() {
   const [activeTab, setActiveTab] = useState(0);
-  const [categories, setCategories] = useState(skillCategories);
+  const categories = skillCategories;
   const [ref, visible] = useReveal();
 
-  useEffect(() => {
-    let cancelled = false;
-    fetchSkills()
-      .then((data) => {
-        if (cancelled) return;
-        const grouped = groupSkillsByCategory(data);
-        if (grouped.length > 0) setCategories(grouped);
-      })
-      .catch(() => {
-        // API not running yet — the curated fallback list is shown instead.
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  // The API can return a different set of tabs than the fallback did, so keep
-  // the selection inside range rather than rendering an empty grid.
   const activeIndex = Math.min(activeTab, categories.length - 1);
   const active = categories[activeIndex];
 

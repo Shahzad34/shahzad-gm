@@ -1,4 +1,4 @@
-export const fallbackProjects = [
+export const projects = [
   {
     _id: "eventsphere",
     title: "EventSphere Management",

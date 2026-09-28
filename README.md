@@ -2,6 +2,29 @@
 
 A premium, mobile-first, dark "hacker/cyberpunk" developer portfolio built on the MERN stack.
 
+> **This site is now fully static.** All content (projects, skills, contact links) lives in
+> `frontend/src/data/` and is bundled at build time — nothing is fetched from a backend.
+> The `backend/` folder is legacy and is not used or deployed.
+
+## Live on GitHub Pages
+
+Every push to `main` builds `frontend/` and deploys it via
+`.github/workflows/deploy.yml`.
+
+1. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions** (one-time).
+2. Push to `main`. The site appears at `https://<username>.github.io/<repo>/`.
+
+To edit content, change `frontend/src/data/projects.js` or `frontend/src/data/skills.js`
+and push. Contact form: by default it opens the visitor's email app; to send in-page,
+create a form at [formspree.io](https://formspree.io) and add its URL as a repo Actions
+variable named `FORMSPREE_ENDPOINT`.
+
+Local preview: `cd frontend && npm install && npm run dev`.
+
+---
+
+*The sections below describe the original MERN setup and are kept for reference.*
+
 ```
 portfolio/
 ├── frontend/   React + Vite + React Router + Anime.js + GSAP

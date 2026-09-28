@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Github, ExternalLink } from "lucide-react";
-import { fetchProjects } from "../../../lib/api.js";
-import { fallbackProjects } from "../../../data/projects.js";
+import { projects } from "../../../data/projects.js";
 import { PROJECT_COUNT } from "../sceneConfig.js";
 import { useProgressStore } from "../progressStore.jsx";
 import GlitchText from "../GlitchText.jsx";
@@ -10,22 +9,7 @@ import styles from "./ArmoryHUD.module.css";
 
 export default function ArmoryHUD() {
   const store = useProgressStore();
-  const [projects, setProjects] = useState(fallbackProjects);
   const [activeIndex, setActiveIndex] = useState(store.projectIndex);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetchProjects()
-      .then((data) => {
-        if (!cancelled && Array.isArray(data) && data.length > 0) setProjects(data);
-      })
-      .catch(() => {
-        // API not running — the curated fallback list stays on screen.
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   // Syncs the highlighted list item with whichever holo-card the camera is
   // currently passing in the 3D display case, so the 2D panel and the 3D
@@ -47,9 +31,9 @@ export default function ArmoryHUD() {
           >
             <span className={styles.itemTitle}>{project.title}</span>
 
-            {project.technologies?.length > 0 && (
+            {project.techStack?.length > 0 && (
               <div className={styles.techRow}>
-                {project.technologies.slice(0, 4).map((tech) => (
+                {project.techStack.slice(0, 4).map((tech) => (
                   <span key={tech} className={styles.tech}>
                     {tech}
                   </span>

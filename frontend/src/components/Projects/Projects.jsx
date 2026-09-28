@@ -1,30 +1,10 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { fetchProjects } from "../../lib/api.js";
-import { fallbackProjects } from "../../data/projects.js";
+import { projects } from "../../data/projects.js";
 import ProjectCard from "./ProjectCard.jsx";
 import styles from "./Projects.module.css";
 
 export default function Projects({ limit, showViewAll = true }) {
-  const [projects, setProjects] = useState(fallbackProjects);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetchProjects()
-      .then((data) => {
-        if (!cancelled && Array.isArray(data) && data.length > 0) {
-          setProjects(data);
-        }
-      })
-      .catch(() => {
-        // API not running yet — the curated fallback list is shown instead.
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   const visible = limit ? projects.slice(0, limit) : projects;
 
   return (
